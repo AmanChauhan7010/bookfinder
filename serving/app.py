@@ -1,3 +1,12 @@
+import torch
+try:
+    torch.classes.__path__ = []
+except AttributeError:
+    pass
+
+import streamlit as st
+# ... rest of your imports
+
 import streamlit as st
 import pandas as pd
 import sys
@@ -129,12 +138,15 @@ with st.sidebar:
 
 # --- RESOURCE LOADING ---
 @st.cache_resource
+@st.cache_resource
 def load_search_resources():
     try:
         model = load_model()
         embeddings_data = load_embeddings()
         return model, embeddings_data
     except Exception as e:
+        # This will show you the real error on the webpage
+        st.error(f"Error loading resources: {e}")
         return None, None
 
 model, embeddings_data = load_search_resources()
@@ -250,7 +262,7 @@ else:
     c1, c2, c3 = st.columns([1, 2, 1])
     with c2:
         query = st.text_input(
-            "", 
+            "Search for a book", 
             placeholder="e.g., 'A mystery novel set in Victorian London'...", 
             label_visibility="collapsed",
             key="search_input",
