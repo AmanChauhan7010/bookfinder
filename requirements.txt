@@ -2,6 +2,8 @@ streamlit==1.32.2
 pandas>=2.0.3
 numpy>=1.26.4
 scikit-learn>=1.3.2
+# Pinning these specifically to avoid the 3.13/v1.0.0 conflicts
+huggingface-hub==0.25.2
 sentence-transformers==2.2.2
 torch>=2.1.2
 transformers>=4.36.2
